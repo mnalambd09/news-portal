@@ -2,12 +2,20 @@ const loadCategories = async() => {
     const url = `https://openapi.programming-hero.com/api/news/categories`
     const res = await fetch(url);
     const data = await res.json();
-    console.log(data.data.news_category);
+    displayCategories(data.data.news_category);
 }
 
-const displayCategories = () => {
+const displayCategories = (news) => {
     const categories = document.getElementById('categories');
-    const creatDiv = document.createElement('div');
+    news.forEach(news => {
+        const creatDiv = document.createElement('div');
+        creatDiv.classList.add('float-end');
+        creatDiv.innerHTML = `
+        <h6>${news.category_name}</h6>
+        `;
+        categories.appendChild(creatDiv);
+    });
+   
 }
 
 
