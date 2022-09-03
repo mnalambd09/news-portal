@@ -44,16 +44,17 @@ const displayNewsDetails = (data) => {
           <h5 class="card-title">${data.title}</h5>
           <p class="card-text">${data.details.slice(0,300)}</p>
           <p class="card-text">${data.details.slice(0,200)}....</p>
+        </div>  
        <div class="row">
         <div class="col-md-4 pt-5">
           <img class = "rounded-circle autImg" src="${data.author.img}">
-          <p class="float">${data.author.name}</p>
+          <p class="d-inline">${data.author.name ? data.author.name : 'no author'}</p>
           <p>${data.author.published_date}</p>
         </div>
         <div class="col-md-8 pt-5 d-flex justify-content-evenly">
-          <p>${data.total_view}</p>
-          <p>${data.rating.badge}</p>
-          <p>${data.rating.number}</p>
+          <p <i class="fa-solid fa-eye"></i> ${data.total_view ? data.total_view : '00'}</p>
+          <p><i class="fa-solid fa-star-half-stroke text-warning"></i><i class="fa-regular text-warning fa-star"></i> <i class="fa-regular text-warning fa-star"></i> <i class="fa-regular text-warning fa-star"></i> <i class="fa-regular text-warning fa-star"></i></p>
+          <p><i class="fa-sharp fa-solid fa-arrow-right fs-3 text-primary"></i></p>
         </div>
         </div>
       </div>
@@ -62,8 +63,11 @@ const displayNewsDetails = (data) => {
     `;
     newsDis.appendChild(creatDiv);
     });
-    
+
+    const newsLength = newsDis.children.length;
+    const newsQuantity = document.getElementById('categoriItem');
+    newsQuantity.innerText = newsLength + ' ' + 'Item News founded';
+    console.log(newsLength);
 }
 
 loadCategories();
-displayNewsDetails(category_id)
