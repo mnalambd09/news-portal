@@ -41,7 +41,7 @@ const displayNewsDetails = (data) => {
     </div>
     <div class="col-md-9">
       <div class="card-body">
-          <h5 class="card-title">${data.title}</h5>
+          <h5 class="card-title fw-bold fs-3">${data.title}</h5>
           <p class="card-text">${data.details.slice(0,300)}</p>
           <p class="card-text">${data.details.slice(0,200)}....</p>
         </div>  
@@ -66,7 +66,7 @@ const displayNewsDetails = (data) => {
 
     const newsLength = newsDis.children.length;
     const newsQuantity = document.getElementById('categoriItem');
-    newsQuantity.innerText = newsLength + ' ' + 'Item News founded';
+    newsQuantity.innerText = newsLength + ' ' + 'Items News founded';
     console.log(newsLength);
 }
 
