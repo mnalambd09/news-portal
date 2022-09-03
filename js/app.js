@@ -35,7 +35,7 @@ const displayNewsDetails = (data) => {
     creatDiv.classList.add('my-4');
     creatDiv.classList.add('shadow');
     creatDiv.innerHTML = `
-    <div class="row g-0">
+    <div class="row g-0" >
     <div class="col-md-3">
       <img src="${data.thumbnail_url}" class="img-fluid rounded-start p-3" alt="...">
     </div>
@@ -48,13 +48,46 @@ const displayNewsDetails = (data) => {
        <div class="row">
         <div class="col-md-4 pt-5">
           <img class = "rounded-circle autImg" src="${data.author.img}">
-          <p class="d-inline">${data.author.name ? data.author.name : 'no author'}</p>
-          <p>${data.author.published_date}</p>
+          <p class="d-inline">${data.author.name ? data.author.name : 'No Data Available' }</p>
+          <p></p>
         </div>
         <div class="col-md-8 pt-5 d-flex justify-content-evenly">
           <p <i class="fa-solid fa-eye"></i> ${data.total_view ? data.total_view : '00'}</p>
           <p><i class="fa-solid fa-star-half-stroke text-warning"></i><i class="fa-regular text-warning fa-star"></i> <i class="fa-regular text-warning fa-star"></i> <i class="fa-regular text-warning fa-star"></i> <i class="fa-regular text-warning fa-star"></i></p>
+          <button class="btn btn-primary" data-bs-toggle="modal" onclick="detailsNews()" data-bs-target="#staticBackdrop">View Details</button>
           <p><i class="fa-sharp fa-solid fa-arrow-right fs-3 text-primary"></i></p>
+
+          <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="staticBackdropLabel">${data.title}</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            <img src="${data.thumbnail_url}" class="img-fluid w-100 rounded-start p-3" alt="...">
+            <p class="card-text">${data.details}</p>
+
+            <div class="row">
+            <div class="col-md-5 pt-5">
+              <img class = "rounded-circle autImg" src="${data.author.img}">
+              <p class="d-inline">${data.author.name ? data.author.name : 'No Data Available' }</p>
+              <p></p>
+            </div>
+            <div class="col-md-7 pt-5 d-flex justify-content-evenly">
+              <p <i class="fa-solid fa-eye"></i> ${data.total_view ? data.total_view : '00'}</p>
+              <p><i class="fa-solid fa-star-half-stroke text-warning"></i><i class="fa-regular text-warning fa-star"></i> <i class="fa-regular text-warning fa-star"></i> <i class="fa-regular text-warning fa-star"></i> <i class="fa-regular text-warning fa-star"></i></p>
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Oky</button>
+            </div>
+          </div>
+        </div>
+      </div>
+          
         </div>
         </div>
       </div>
@@ -68,6 +101,17 @@ const displayNewsDetails = (data) => {
     const newsQuantity = document.getElementById('categoriItem');
     newsQuantity.innerText = newsLength + ' ' + 'Items News founded';
     console.log(newsLength);
+}
+
+const detailsNews = (news_id) => {
+  const url = `https://openapi.programming-hero.com/api/news/${news_id}`;
+  fetch(url)
+  .then(res => res.json())
+  .then(data => console.log(data.data))
+}
+ 
+const displayDetailNews = () => {
+  
 }
 
 loadCategories();
