@@ -24,8 +24,8 @@ const loadNews = (category_id) => {
     fetch(url)
     .then(res => res.json())
     .then(data => displayNewsDetails(data.data))
+    toggleSpinner(true);
 }
-
 const displayNewsDetails = (data) => {
     const newsDis = document.getElementById('displayNews');
     newsDis.textContent = '';
@@ -34,6 +34,7 @@ const displayNewsDetails = (data) => {
     creatDiv.classList.add('card');
     creatDiv.classList.add('my-4');
     creatDiv.classList.add('shadow');
+   
     creatDiv.innerHTML = `
     <div class="row g-0" >
     <div class="col-md-3">
@@ -95,6 +96,7 @@ const displayNewsDetails = (data) => {
   </div>
     `;
     newsDis.appendChild(creatDiv);
+    toggleSpinner(false);
     });
 
     const newsLength = newsDis.children.length;
@@ -112,6 +114,16 @@ const detailsNews = (news_id) => {
  
 const displayDetailNews = () => {
   
+}
+
+const toggleSpinner = isLoading => {
+  const loaderSection = document.getElementById('spinner');
+  if(isLoading){
+    loaderSection.classList.remove('d-none')
+  }
+  else{
+    loaderSection.classList.add('d-none')
+  }
 }
 
 loadCategories();
